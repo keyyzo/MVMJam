@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=3 uid="uid://i62kqrax5mjv"]
+
+[ext_resource type="PackedScene" uid="uid://wqsdaw1odyg2" path="res://Scenes/fps_controller.tscn" id="1_t4jdm"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_65ick"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_fm208"]
+sky_material = SubResource("ProceduralSkyMaterial_65ick")
+
+[sub_resource type="Environment" id="Environment_wqogu"]
+background_mode = 2
+sky = SubResource("Sky_fm208")
+tonemap_mode = 2
+
+[node name="World" type="Node"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_wqogu")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="CharacterBody3D" parent="." instance=ExtResource("1_t4jdm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.867758, 0)
+MOUSE_SENS = 0.5
+
+[node name="PracticeStage" type="Node3D" parent="."]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="PracticeStage"]
+transform = Transform3D(20, 0, 0, 0, 0.5, 0, 0, 0, 20, 0, 0, 0)
+use_collision = true
+collision_mask = 6
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="PracticeStage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1, 0)
+use_collision = true
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="PracticeStage/CSGBox3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1, 0)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="PracticeStage/CSGBox3D2/CSGBox3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1, 2)

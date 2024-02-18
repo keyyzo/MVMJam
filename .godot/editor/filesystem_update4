@@ -1,0 +1,8 @@
+res://Scenes/world.tscn
+res://Scenes/player.tscn
+res://Player.gd
+res://Scripts/state.gd
+res://Scripts/state_machine.gd
+res://Scenes/IdlePlayerState.gd
+res://Scenes/fps_controller.tscn
+res://Scripts/fps_controller.gd
