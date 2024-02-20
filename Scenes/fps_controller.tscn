@@ -1,6 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://wqsdaw1odyg2"]
+[gd_scene load_steps=11 format=3 uid="uid://wqsdaw1odyg2"]
 
 [ext_resource type="Script" path="res://Scripts/fps_controller.gd" id="1_m0s3d"]
+[ext_resource type="Script" path="res://Scripts/Reticle.gd" id="2_4mtk6"]
+[ext_resource type="Theme" uid="uid://bbfvrcnpqxkf6" path="res://UI/Themes/debug.tres" id="3_mk03r"]
+[ext_resource type="Script" path="res://Scripts/debug.gd" id="4_b7sim"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gflmr"]
 
@@ -90,10 +93,13 @@ _data = {
 "RESET": SubResource("Animation_3nlh8")
 }
 
-[node name="CharacterBody3D" type="CharacterBody3D" node_paths=PackedStringArray("ANIMATION_PLAYER", "CAMERA_CONTROLLER")]
+[sub_resource type="SphereShape3D" id="SphereShape3D_br15n"]
+
+[node name="CharacterBody3D" type="CharacterBody3D" node_paths=PackedStringArray("ANIMATION_PLAYER", "CAMERA_CONTROLLER", "CROUCH_SHAPECAST")]
 script = ExtResource("1_m0s3d")
 ANIMATION_PLAYER = NodePath("AnimationPlayer")
 CAMERA_CONTROLLER = NodePath("CameraController/Camera3D")
+CROUCH_SHAPECAST = NodePath("ShapeCast3D")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -111,3 +117,69 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 libraries = {
 "": SubResource("AnimationLibrary_e1d42")
 }
+
+[node name="ShapeCast3D" type="ShapeCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+shape = SubResource("SphereShape3D_br15n")
+target_position = Vector3(0, 0.5, 0)
+
+[node name="UserInterface" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="Reticle" type="CenterContainer" parent="UserInterface" node_paths=PackedStringArray("RETICLE_LINES", "PLAYER_CONTROLLER")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_4mtk6")
+RETICLE_LINES = [NodePath("Top"), NodePath("Right"), NodePath("Bottom"), NodePath("Left")]
+PLAYER_CONTROLLER = NodePath("../..")
+
+[node name="Top" type="Line2D" parent="UserInterface/Reticle"]
+points = PackedVector2Array(0, -5, 0, -15)
+width = 2.0
+
+[node name="Right" type="Line2D" parent="UserInterface/Reticle"]
+points = PackedVector2Array(5, 0, 15, 0)
+width = 2.0
+
+[node name="Bottom" type="Line2D" parent="UserInterface/Reticle"]
+points = PackedVector2Array(0, 5, 0, 15)
+width = 2.0
+
+[node name="Left" type="Line2D" parent="UserInterface/Reticle"]
+points = PackedVector2Array(-5, 0, -15, 0)
+width = 2.0
+
+[node name="DebugPanel" type="PanelContainer" parent="UserInterface"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 210.0
+offset_bottom = 50.0
+theme = ExtResource("3_mk03r")
+script = ExtResource("4_b7sim")
+
+[node name="MarginContainer" type="MarginContainer" parent="UserInterface/DebugPanel"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UserInterface/DebugPanel/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[connection signal="animation_started" from="AnimationPlayer" to="." method="_on_animation_player_animation_started"]

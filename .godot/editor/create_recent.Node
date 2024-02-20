@@ -1,3 +1,11 @@
+PanelContainer
+VBoxContainer
+MarginContainer
+Panel
+Line2D
+CenterContainer
+Control
+ShapeCast3D
 AnimationPlayer
 ReflectionProbe
 Camera3D
@@ -5,11 +13,3 @@ Node3D
 MeshInstance3D
 CollisionShape3D
 CharacterBody3D
-Node
-State
-Marker3D
-Timer
-CSGBox3D
-StaticBody3D
-Generic6DOFJoint3D
-RayCast3D
