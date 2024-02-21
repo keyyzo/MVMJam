@@ -1,9 +1,12 @@
 res://Scenes/fps_controller.tscn
+res://UI/Themes/new_style_box_flat.tres
+res://UI/Themes/debug.tres
+res://Scripts/global.gd
 res://Scripts/fps_controller.gd
+res://Scripts/IdlePlayerState.gd
+res://Scenes/WalkingPlayerState.gd
+res://Scripts/state_machine.gd
 res://Scenes/world.tscn
 res://Scenes/player.tscn
-res://Scripts/Reticle.gd
-res://UI/Themes/debug.tres
-res://UI/Themes/new_style_box_flat.tres
-res://Scripts/debug.gd
-res://Scripts/global.gd
+res://Scripts/SprintingPlayerState.gd
+res://Scripts/WalkingPlayerState.gd
