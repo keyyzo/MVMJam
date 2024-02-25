@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://4qgcljhes8vu"]
+
+[ext_resource type="ArrayMesh" uid="uid://bvnhp24ie5vkt" path="res://Assets/Weapons/Crowbar/crowbar_res.res" id="1_1ifdv"]
+
+[node name="Weapon" type="Node3D"]
+
+[node name="WeaponMesh" type="MeshInstance3D" parent="."]
+layers = 2
+cast_shadow = 0
+mesh = ExtResource("1_1ifdv")
+
+[node name="WeaponShadow" type="MeshInstance3D" parent="."]
+layers = 2
+cast_shadow = 3
+mesh = ExtResource("1_1ifdv")

@@ -32,6 +32,7 @@ func update(delta):
 	elif Input.is_action_pressed("crouch") == false and RELEASED == false:
 		RELEASED = true
 		uncrouch()
+	
 		
 func uncrouch():
 	if CROUCH_SHAPECAST.is_colliding() == false and Input.is_action_pressed("crouch") == false:

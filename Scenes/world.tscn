@@ -36,7 +36,7 @@ transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75
 shadow_enabled = true
 
 [node name="CharacterBody3D" parent="." instance=ExtResource("1_t4jdm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.867758, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.09432, -12.138)
 MOUSE_SENS = 0.5
 
 [node name="PracticeStage" type="Node3D" parent="."]

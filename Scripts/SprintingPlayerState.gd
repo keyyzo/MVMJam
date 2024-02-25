@@ -9,7 +9,11 @@ extends PlayerMovementState
 
 # Called when the node enters the scene tree for the first time.
 func enter(previous_state) -> void:
-	ANIMATION.play("Sprinting",0.5,1.0)
+	if ANIMATION.is_playing() and ANIMATION.current_animation == "JumpEnd":
+		await ANIMATION.animation_finished
+		ANIMATION.play("Sprinting",0.5,1.0)
+	else:
+		ANIMATION.play("Sprinting",0.5,1.0)
 
 func exit() -> void:
 	ANIMATION.speed_scale = 1.0
@@ -32,6 +36,9 @@ func update(delta):
 		
 	if Input.is_action_just_pressed("jump") and PLAYER.is_on_floor():
 		transition.emit("JumpingPlayerState")
+		
+	if PLAYER.velocity.y < -3.0 and !PLAYER.is_on_floor():
+		transition.emit("FallingPlayerState")
 
 func set_animation_speed(anim_speed):
 	var alpha = remap(anim_speed, 0.0, SPEED,0.0,1.0)
