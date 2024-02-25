@@ -1,5 +1,7 @@
-State
+PlayerMovementState
 Node
+CSGBox3D
+State
 PanelContainer
 VBoxContainer
 MarginContainer
@@ -10,6 +12,3 @@ Control
 ShapeCast3D
 AnimationPlayer
 ReflectionProbe
-Camera3D
-Node3D
-MeshInstance3D
