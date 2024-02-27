@@ -1,8 +1,7 @@
-[gd_scene load_steps=28 format=3 uid="uid://wqsdaw1odyg2"]
+[gd_scene load_steps=29 format=3 uid="uid://wqsdaw1odyg2"]
 
 [ext_resource type="Script" path="res://Scripts/fps_controller.gd" id="1_m0s3d"]
 [ext_resource type="Script" path="res://Scripts/Reticle.gd" id="2_4mtk6"]
-[ext_resource type="PackedScene" uid="uid://csnq20l32n1uv" path="res://Assets/Weapons/Crowbar/crowbar.glb" id="2_35di4"]
 [ext_resource type="Theme" uid="uid://bbfvrcnpqxkf6" path="res://UI/Themes/debug.tres" id="3_mk03r"]
 [ext_resource type="Script" path="res://Scripts/debug.gd" id="4_b7sim"]
 [ext_resource type="Script" path="res://Scripts/state_machine.gd" id="5_4kq4c"]
@@ -14,6 +13,7 @@
 [ext_resource type="Script" path="res://Scripts/JumpingPlayerState.gd" id="11_eh081"]
 [ext_resource type="Script" path="res://Scripts/FallingPlayerState.gd" id="12_u6xet"]
 [ext_resource type="Script" path="res://Scripts/SubViewport.gd" id="14_ch2p4"]
+[ext_resource type="Script" path="res://Scripts/DashingPlayerState.gd" id="14_flj4p"]
 [ext_resource type="Script" path="res://Scripts/WeaponCamera.gd" id="15_u78ox"]
 [ext_resource type="PackedScene" uid="uid://4qgcljhes8vu" path="res://Scenes/weapon.tscn" id="16_4kei8"]
 
@@ -445,9 +445,26 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.5, 1, 1.5, 2)
 }
 
+[sub_resource type="Animation" id="Animation_uanl4"]
+resource_name = "Dashing"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CameraController/Camera3D:fov")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [75.0, 95.0, 75.0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_e1d42"]
 _data = {
 "Crouch": SubResource("Animation_go61r"),
+"Dashing": SubResource("Animation_uanl4"),
 "JumpEnd": SubResource("Animation_5ul8k"),
 "JumpStart": SubResource("Animation_ogl8d"),
 "RESET": SubResource("Animation_3nlh8"),
@@ -469,6 +486,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_gflmr")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
+visible = false
 mesh = SubResource("CapsuleMesh_h2qtt")
 
 [node name="CameraController" type="Node3D" parent="."]
@@ -479,8 +497,8 @@ cull_mask = 1048573
 
 [node name="WeaponRig" type="Node3D" parent="CameraController/Camera3D"]
 
-[node name="Crowbar" parent="CameraController/Camera3D/WeaponRig" instance=ExtResource("2_35di4")]
-transform = Transform3D(-0.992459, 0.100939, 0.0695509, 0.0955633, 0.992463, -0.076719, -0.0767706, -0.0694939, -0.994624, 0.215, -0.315, -0.53)
+[node name="Weapon" parent="CameraController/Camera3D/WeaponRig" instance=ExtResource("16_4kei8")]
+transform = Transform3D(-0.997564, -0.0685661, -0.0128318, -0.0180543, 0.0760994, 0.996937, -0.0673796, 0.99474, -0.0771519, 0.359833, -0.256136, -0.465305)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -578,6 +596,9 @@ script = ExtResource("11_eh081")
 [node name="FallingPlayerState" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("12_u6xet")
 
+[node name="DashingPlayerState" type="Node" parent="PlayerStateMachine"]
+script = ExtResource("14_flj4p")
+
 [node name="WeaponViewport" type="SubViewportContainer" parent="."]
 visible = false
 anchors_preset = 15
@@ -596,7 +617,7 @@ script = ExtResource("14_ch2p4")
 visible = false
 cull_mask = 1048574
 script = ExtResource("15_u78ox")
-MAIN_CAMERA = NodePath("../../../CameraController/Camera3D")
+MAIN_CAMERA = NodePath("../../../CameraController/Camera3D/WeaponRig")
 
 [node name="Weapon" parent="WeaponViewport/SubViewport/WeaponCamera" instance=ExtResource("16_4kei8")]
 transform = Transform3D(-0.995396, 0.0958457, -6.70699e-09, -0.00735319, -0.0763658, 0.997053, 0.0955632, 0.992463, 0.076719, 0.215, -0.315, -0.53)

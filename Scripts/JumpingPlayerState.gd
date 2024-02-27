@@ -32,6 +32,8 @@ func update(delta):
 		if PLAYER.velocity.y > 0:
 			PLAYER.velocity.y = PLAYER.velocity.y / RELEASE_JUMP_MULTIPLIER
 			
+	if Input.is_action_just_pressed("dash"):
+		transition.emit("DashingPlayerState")
 		
 	if PLAYER.is_on_floor():
 		ANIMATION.play("JumpEnd")

@@ -34,11 +34,16 @@ func update(delta):
 	if Input.is_action_just_pressed("jump") and PLAYER.is_on_floor():
 		transition.emit("JumpingPlayerState")
 	
+	if Input.is_action_just_pressed("dash"):
+		transition.emit("DashingPlayerState")
+	
 	if PLAYER.velocity.length() == 0.0:
 		transition.emit("IdlePlayerState")
 		
 	if PLAYER.velocity.y < -3.0 and !PLAYER.is_on_floor():
 		transition.emit("FallingPlayerState")
+		
+	
 
 func set_animation_speed(anim_speed):
 	var alpha = remap(anim_speed, 0.0, SPEED,0.0,1.0)
