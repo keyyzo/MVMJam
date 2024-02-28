@@ -60,6 +60,22 @@ tracks/2/keys = {
 "values": [Vector3(0, 1.5, 0), Vector3(0, 1, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_uanl4"]
+resource_name = "Dashing"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CameraController/Camera3D:fov")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [75.0, 95.0, 75.0]
+}
+
 [sub_resource type="Animation" id="Animation_5ul8k"]
 resource_name = "JumpEnd"
 length = 0.4
@@ -443,22 +459,6 @@ tracks/2/keys = {
 "handle_modes": PackedInt32Array(0, 0, 0, 0, 0),
 "points": PackedFloat32Array(0.000325158, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0, 0.5, 1, 1.5, 2)
-}
-
-[sub_resource type="Animation" id="Animation_uanl4"]
-resource_name = "Dashing"
-length = 3.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CameraController/Camera3D:fov")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1, 3),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [75.0, 95.0, 75.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_e1d42"]

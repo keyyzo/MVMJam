@@ -24,7 +24,7 @@ func update(delta):
 		DOUBLE_JUMP = true
 		PLAYER.velocity.y = DOUBLE_JUMP_VELOCITY
 		
-	if Input.is_action_just_pressed("dash"):
+	if Input.is_action_just_pressed("dash") and PLAYER.NUMBER_OF_DASHES > 0:
 		transition.emit("DashingPlayerState")
 		
 	if PLAYER.is_on_floor():

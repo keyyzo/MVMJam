@@ -34,7 +34,7 @@ func update(delta):
 	if Input.is_action_just_pressed("jump") and PLAYER.is_on_floor():
 		transition.emit("JumpingPlayerState")
 	
-	if Input.is_action_just_pressed("dash"):
+	if Input.is_action_just_pressed("dash") and PLAYER.NUMBER_OF_DASHES > 0:
 		transition.emit("DashingPlayerState")
 	
 	if PLAYER.velocity.length() == 0.0:

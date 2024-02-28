@@ -16,6 +16,14 @@ extends CharacterBody3D
 
 var player_speed : float
 
+# Dash variables to be used within the DashingPlayerState
+# May adapt this usage to a resource file but need to understand it more first
+
+@export var NUMBER_OF_DASHES : int = 2
+var reset_dash_timer : Timer
+@export var have_dash_ability : bool = true
+var can_dash : bool = true
+
 # Camera variables
 
 @export var MOUSE_SENS : float = 0.02
