@@ -3,11 +3,8 @@ res://UI/Themes/new_style_box_flat.tres
 res://UI/Themes/debug.tres
 res://Shaders/crowbar_shader.tres
 res://Assets/Weapons/Crowbar/crowbar_res.res
-res://Scripts/DashingPlayerState.gd
-res://Scenes/fps_controller.tscn
+res://Scripts/Weapons.gd
+res://Assets/Weapons/Crowbar/crowbar_stats.tres
+res://Scripts/initiate_weapon.gd
 res://Scenes/weapon.tscn
-res://Scripts/fps_controller.gd
-res://Scripts/FallingPlayerState.gd
-res://Scripts/JumpingPlayerState.gd
-res://Scripts/SprintingPlayerState.gd
-res://Scripts/WalkingPlayerState.gd
+res://Scenes/fps_controller.tscn
