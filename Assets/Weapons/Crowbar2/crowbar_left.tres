@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Weapons" load_steps=3 format=3 uid="uid://ddlrbad0v5m0n"]
+
+[ext_resource type="Script" path="res://Scripts/Weapons.gd" id="1_sfrmv"]
+[ext_resource type="ArrayMesh" uid="uid://bvnhp24ie5vkt" path="res://Assets/Weapons/Crowbar/crowbar_res.res" id="1_vllpg"]
+
+[resource]
+script = ExtResource("1_sfrmv")
+name = &"Crowbar Left"
+position = Vector3(-0.225, -0.19, -0.215)
+rotation = Vector3(-88, 185, 1)
+mesh = ExtResource("1_vllpg")
+shadow = false
+damage_amount = 0.0

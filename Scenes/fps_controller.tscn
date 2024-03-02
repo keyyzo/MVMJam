@@ -1,7 +1,8 @@
-[gd_scene load_steps=29 format=3 uid="uid://wqsdaw1odyg2"]
+[gd_scene load_steps=30 format=3 uid="uid://wqsdaw1odyg2"]
 
 [ext_resource type="Script" path="res://Scripts/fps_controller.gd" id="1_m0s3d"]
 [ext_resource type="Script" path="res://Scripts/Reticle.gd" id="2_4mtk6"]
+[ext_resource type="Texture2D" uid="uid://d4f8l6pg6ettx" path="res://Sprites/base_melee_weapon.png" id="3_dkmqo"]
 [ext_resource type="Theme" uid="uid://bbfvrcnpqxkf6" path="res://UI/Themes/debug.tres" id="3_mk03r"]
 [ext_resource type="Script" path="res://Scripts/debug.gd" id="4_b7sim"]
 [ext_resource type="Script" path="res://Scripts/state_machine.gd" id="5_4kq4c"]
@@ -497,8 +498,10 @@ cull_mask = 1048573
 
 [node name="WeaponRig" type="Node3D" parent="CameraController/Camera3D"]
 
-[node name="Weapon" parent="CameraController/Camera3D/WeaponRig" instance=ExtResource("16_4kei8")]
-transform = Transform3D(-0.997564, -0.0685661, -0.0128318, -0.0180543, 0.0760994, 0.996937, -0.0673796, 0.99474, -0.0771519, 0.359833, -0.256136, -0.465305)
+[node name="Sprite3D" type="Sprite3D" parent="CameraController/Camera3D/WeaponRig"]
+transform = Transform3D(0.80801, 0.0406771, -0.587763, 0.586689, 0.0358834, 0.809017, 0.0539994, -0.998528, 0.00512934, 0.345, -0.205, -0.625)
+texture_filter = 0
+texture = ExtResource("3_dkmqo")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -620,7 +623,7 @@ script = ExtResource("15_u78ox")
 MAIN_CAMERA = NodePath("../../../CameraController/Camera3D/WeaponRig")
 
 [node name="Weapon" parent="WeaponViewport/SubViewport/WeaponCamera" instance=ExtResource("16_4kei8")]
-transform = Transform3D(-0.995396, 0.0958457, -6.70699e-09, -0.00735319, -0.0763658, 0.997053, 0.0955632, 0.992463, 0.076719, 0.215, -0.315, -0.53)
+transform = Transform3D(-0.994523, 0.104476, -0.00304169, 0.00060908, 0.0348942, 0.999391, 0.104518, 0.993916, -0.0347667, -0.225, -0.19, -0.215)
 visible = false
 
 [connection signal="animation_started" from="AnimationPlayer" to="." method="_on_animation_player_animation_started"]
