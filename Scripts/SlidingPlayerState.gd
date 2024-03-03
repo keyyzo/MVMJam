@@ -21,6 +21,8 @@ func update(delta):
 	PLAYER.update_input(SPEED,ACCELERATION,DECELERATION)
 	PLAYER.update_velocity()
 	
+	attack()
+	
 func set_tilt(player_rotation) -> void:
 	var tilt = Vector3.ZERO
 	tilt.z = clamp(TILT_AMOUNT * player_rotation, -0.1, 0.1)
@@ -34,3 +36,10 @@ func set_tilt(player_rotation) -> void:
 func finish():
 	transition.emit("CrouchingPlayerState")
 	
+
+func attack():
+	if Input.is_action_pressed("attack"):
+		if PLAYER.WEAPON_RIG.get_child(0).is_in_group("melee"):
+			if !PLAYER.WEAPON_ANIMATION_PLAYER.is_playing():
+				PLAYER.WEAPON_ANIMATION_PLAYER.play("MeleeAttack")
+				print("attacking")

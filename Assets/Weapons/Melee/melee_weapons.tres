@@ -1,9 +1,14 @@
-[gd_resource type="Resource" load_steps=2 format=3 uid="uid://dcbvpgob355cv"]
+[gd_resource type="Resource" script_class="MeleeWeapons" load_steps=3 format=3 uid="uid://dcbvpgob355cv"]
 
-[sub_resource type="GDScript" id="GDScript_g2231"]
-script/source = "class_name MeleeWeapons
-
-extends Resource"
+[ext_resource type="Script" path="res://Scripts/Melee_Weapons.gd" id="1_geial"]
+[ext_resource type="Texture2D" uid="uid://d4f8l6pg6ettx" path="res://Sprites/base_melee_weapon.png" id="2_3mrqp"]
 
 [resource]
-script = SubResource("GDScript_g2231")
+script = ExtResource("1_geial")
+name = &"Blade"
+position = Vector3(0.345, -0.205, -0.625)
+rotation = Vector3(-54, -89.5, 86.5)
+texture = ExtResource("2_3mrqp")
+damage_amount = 0.0
+damage_speed = 0.0
+damage_range = 0.0

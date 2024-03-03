@@ -29,3 +29,12 @@ func update(delta):
 		
 	if PLAYER.velocity.y < -3.0 and !PLAYER.is_on_floor():
 		transition.emit("FallingPlayerState")
+		
+	attack()
+		
+func attack():
+	if Input.is_action_pressed("attack"):
+		if PLAYER.WEAPON_RIG.get_child(0).is_in_group("melee"):
+			if !PLAYER.WEAPON_ANIMATION_PLAYER.is_playing():
+				PLAYER.WEAPON_ANIMATION_PLAYER.play("MeleeAttack")
+				print("attacking")

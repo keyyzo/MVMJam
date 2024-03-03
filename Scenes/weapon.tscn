@@ -5,6 +5,7 @@
 [ext_resource type="Resource" uid="uid://ddlrbad0v5m0n" path="res://Assets/Weapons/Crowbar2/crowbar_left.tres" id="2_0oqqg"]
 
 [node name="Weapon" type="Node3D"]
+transform = Transform3D(-0.994523, 0.104475, -0.00304169, 0.00060908, 0.0348942, 0.999391, 0.104518, 0.993915, -0.0347667, -0.225, -0.19, -0.215)
 script = ExtResource("1_0am32")
 WEAPON_TYPE = ExtResource("2_0oqqg")
 
@@ -15,5 +16,6 @@ mesh = ExtResource("1_1ifdv")
 
 [node name="WeaponShadow" type="MeshInstance3D" parent="."]
 unique_name_in_owner = true
+visible = false
 cast_shadow = 3
 mesh = ExtResource("1_1ifdv")

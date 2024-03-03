@@ -1,4 +1,7 @@
 Sprite3D
+CollisionShape3D
+StaticBody3D
+AnimationPlayer
 PlayerMovementState
 Node
 MeshInstance3D
@@ -9,7 +12,3 @@ Node3D
 CSGBox3D
 State
 PanelContainer
-VBoxContainer
-MarginContainer
-Panel
-Line2D

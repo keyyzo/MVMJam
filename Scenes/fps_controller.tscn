@@ -1,8 +1,8 @@
-[gd_scene load_steps=30 format=3 uid="uid://wqsdaw1odyg2"]
+[gd_scene load_steps=33 format=3 uid="uid://wqsdaw1odyg2"]
 
 [ext_resource type="Script" path="res://Scripts/fps_controller.gd" id="1_m0s3d"]
 [ext_resource type="Script" path="res://Scripts/Reticle.gd" id="2_4mtk6"]
-[ext_resource type="Texture2D" uid="uid://d4f8l6pg6ettx" path="res://Sprites/base_melee_weapon.png" id="3_dkmqo"]
+[ext_resource type="PackedScene" uid="uid://bqehg57dp8nen" path="res://Scenes/melee_weapon.tscn" id="2_qn3pc"]
 [ext_resource type="Theme" uid="uid://bbfvrcnpqxkf6" path="res://UI/Themes/debug.tres" id="3_mk03r"]
 [ext_resource type="Script" path="res://Scripts/debug.gd" id="4_b7sim"]
 [ext_resource type="Script" path="res://Scripts/state_machine.gd" id="5_4kq4c"]
@@ -21,6 +21,43 @@
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gflmr"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_h2qtt"]
+
+[sub_resource type="Animation" id="Animation_uya8o"]
+resource_name = "MeleeAttack"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeleeWeapon:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0.345, -0.205, -0.625), Vector3(0.345, -0.205, -0.5), Vector3(0.345, -0.205, -1), Vector3(0.345, -0.205, -0.625)]
+}
+
+[sub_resource type="Animation" id="Animation_htdre"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeleeWeapon:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.345, -0.205, -0.625)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_i61ey"]
+_data = {
+"MeleeAttack": SubResource("Animation_uya8o"),
+"RESET": SubResource("Animation_htdre")
+}
 
 [sub_resource type="Animation" id="Animation_go61r"]
 resource_name = "Crouch"
@@ -476,9 +513,12 @@ _data = {
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_br15n"]
 
-[node name="CharacterBody3D" type="CharacterBody3D" node_paths=PackedStringArray("ANIMATION_PLAYER", "CAMERA_CONTROLLER", "CROUCH_SHAPECAST")]
+[node name="CharacterBody3D" type="CharacterBody3D" node_paths=PackedStringArray("ANIMATION_PLAYER", "WEAPON_ANIMATION_PLAYER", "CAMERA_CONTROLLER", "CROUCH_SHAPECAST")]
+collision_layer = 2
+collision_mask = 41
 script = ExtResource("1_m0s3d")
 ANIMATION_PLAYER = NodePath("AnimationPlayer")
+WEAPON_ANIMATION_PLAYER = NodePath("CameraController/Camera3D/WeaponRig/WeaponAnimations")
 CAMERA_CONTROLLER = NodePath("CameraController/Camera3D")
 CROUCH_SHAPECAST = NodePath("ShapeCast3D")
 
@@ -497,11 +537,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 cull_mask = 1048573
 
 [node name="WeaponRig" type="Node3D" parent="CameraController/Camera3D"]
+unique_name_in_owner = true
 
-[node name="Sprite3D" type="Sprite3D" parent="CameraController/Camera3D/WeaponRig"]
-transform = Transform3D(0.80801, 0.0406771, -0.587763, 0.586689, 0.0358834, 0.809017, 0.0539994, -0.998528, 0.00512934, 0.345, -0.205, -0.625)
-texture_filter = 0
-texture = ExtResource("3_dkmqo")
+[node name="MeleeWeapon" parent="CameraController/Camera3D/WeaponRig" instance=ExtResource("2_qn3pc")]
+transform = Transform3D(0.80801, 0.0406771, -0.587763, 0.586689, 0.0358834, 0.809017, 0.0539994, -0.998527, 0.00512935, 0.345, -0.205, -0.625)
+
+[node name="WeaponAnimations" type="AnimationPlayer" parent="CameraController/Camera3D/WeaponRig"]
+libraries = {
+"": SubResource("AnimationLibrary_i61ey")
+}
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

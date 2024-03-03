@@ -13,8 +13,13 @@ extends CharacterBody3D
 @export var GRAVITY : float = 12.0
 
 @export var ANIMATION_PLAYER : AnimationPlayer
+@export var WEAPON_ANIMATION_PLAYER : AnimationPlayer
 
 var player_speed : float
+
+# Player weapon variables
+
+@onready var WEAPON_RIG : Node3D = %WeaponRig
 
 # Dash variables to be used within the DashingPlayerState
 # May adapt this usage to a resource file but need to understand it more first

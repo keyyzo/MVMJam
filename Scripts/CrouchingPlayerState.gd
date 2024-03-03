@@ -33,6 +33,7 @@ func update(delta):
 		RELEASED = true
 		uncrouch()
 	
+	attack()
 		
 func uncrouch():
 	if CROUCH_SHAPECAST.is_colliding() == false and Input.is_action_pressed("crouch") == false:
@@ -43,3 +44,12 @@ func uncrouch():
 	elif CROUCH_SHAPECAST.is_colliding() == true:
 		await get_tree().create_timer(0.1).timeout
 		uncrouch()
+		
+
+		
+func attack():
+	if Input.is_action_pressed("attack"):
+		if PLAYER.WEAPON_RIG.get_child(0).is_in_group("melee"):
+			if !PLAYER.WEAPON_ANIMATION_PLAYER.is_playing():
+				PLAYER.WEAPON_ANIMATION_PLAYER.play("MeleeAttack")
+				print("attacking")
