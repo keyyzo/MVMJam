@@ -1,5 +1,9 @@
-Sprite3D
 CollisionShape3D
+Area3D
+Sprite3D
+RigidBody3D
+Marker3D
+RayCast3D
 StaticBody3D
 AnimationPlayer
 PlayerMovementState
@@ -8,7 +12,3 @@ MeshInstance3D
 Camera3D
 SubViewport
 SubViewportContainer
-Node3D
-CSGBox3D
-State
-PanelContainer

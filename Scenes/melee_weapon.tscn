@@ -7,7 +7,7 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_gxth8"]
 
 [node name="MeleeWeapon" type="Sprite3D" groups=["melee"]]
-transform = Transform3D(0.80801, 0.0406771, -0.587763, 0.586689, 0.0358834, 0.809017, 0.0539994, -0.998528, 0.00512934, 0.345, -0.205, -0.625)
+transform = Transform3D(0.80801, 0.0406771, -0.587763, 0.586689, 0.0358834, 0.809017, 0.0539994, -0.998528, 0.00512935, 0.345, -0.205, -0.625)
 texture_filter = 0
 texture = ExtResource("1_relfl")
 script = ExtResource("1_f4r80")

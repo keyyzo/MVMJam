@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://bdjujprgcrj1a"]
+
+[ext_resource type="Texture2D" uid="uid://bnosk5iwf30xt" path="res://Sprites/base_range_weapon.png" id="1_n2omi"]
+[ext_resource type="Script" path="res://Scripts/range_weapon.gd" id="1_rn13k"]
+
+[node name="RangeWeapon" type="Node3D" node_paths=PackedStringArray("WEAPON_MUZZLE") groups=["range"]]
+script = ExtResource("1_rn13k")
+WEAPON_MUZZLE = NodePath("Muzzle")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(0.257717, -0.0921968, -0.961812, 0.965931, 0.0489715, 0.254126, 0.0236718, -0.994536, 0.101676, 0.275, -0.1, -0.65)
+texture_filter = 0
+texture = ExtResource("1_n2omi")
+
+[node name="Muzzle" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.22527, -0.0822962, -1.17951)

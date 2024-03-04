@@ -2,7 +2,7 @@ class_name SlidingPlayerState
 
 extends PlayerMovementState
 
-@export var SPEED : float = 6.0
+@export var SPEED : float = 12.0
 @export var ACCELERATION : float = 0.1
 @export var DECELERATION : float = 0.25
 @export var TILT_AMOUNT : float = 0.09

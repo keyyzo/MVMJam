@@ -20,6 +20,7 @@ var player_speed : float
 # Player weapon variables
 
 @onready var WEAPON_RIG : Node3D = %WeaponRig
+@export var AIM_FROM_CAMERA: RayCast3D
 
 # Dash variables to be used within the DashingPlayerState
 # May adapt this usage to a resource file but need to understand it more first
@@ -31,7 +32,7 @@ var can_dash : bool = true
 
 # Camera variables
 
-@export var MOUSE_SENS : float = 0.02
+@export var MOUSE_SENS : float = 0.50
 @export var TILT_LOWER_LIMIT := deg_to_rad(-90)
 @export var TILT_UPPER_LIMIT := deg_to_rad(90)
 @export var CAMERA_CONTROLLER : Camera3D
@@ -121,3 +122,4 @@ func update_input(speed: float, acceleration : float, deceleration : float) -> v
 	
 func update_velocity() -> void:
 	move_and_slide()
+	

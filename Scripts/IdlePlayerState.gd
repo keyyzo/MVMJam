@@ -33,8 +33,15 @@ func update(delta):
 	attack()
 		
 func attack():
-	if Input.is_action_pressed("attack"):
+	if Input.is_action_just_pressed("attack"):
 		if PLAYER.WEAPON_RIG.get_child(0).is_in_group("melee"):
 			if !PLAYER.WEAPON_ANIMATION_PLAYER.is_playing():
 				PLAYER.WEAPON_ANIMATION_PLAYER.play("MeleeAttack")
 				print("attacking")
+		elif PLAYER.WEAPON_RIG.get_child(0).is_in_group("range"):
+			if PLAYER.WEAPON_RIG.get_child(0).has_method("attack"):
+				PLAYER.WEAPON_RIG.get_child(0).attack()
+				print("attacking")
+
+
+			
