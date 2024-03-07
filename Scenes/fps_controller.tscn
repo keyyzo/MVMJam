@@ -1,8 +1,9 @@
-[gd_scene load_steps=33 format=3 uid="uid://wqsdaw1odyg2"]
+[gd_scene load_steps=34 format=3 uid="uid://wqsdaw1odyg2"]
 
 [ext_resource type="Script" path="res://Scripts/fps_controller.gd" id="1_m0s3d"]
 [ext_resource type="Script" path="res://Scripts/Reticle.gd" id="2_4mtk6"]
 [ext_resource type="PackedScene" uid="uid://bdjujprgcrj1a" path="res://Scenes/range_weapon.tscn" id="2_cpcou"]
+[ext_resource type="Script" path="res://Scripts/WeaponsManager.gd" id="2_t1pvi"]
 [ext_resource type="Theme" uid="uid://bbfvrcnpqxkf6" path="res://UI/Themes/debug.tres" id="3_mk03r"]
 [ext_resource type="Script" path="res://Scripts/debug.gd" id="4_b7sim"]
 [ext_resource type="Script" path="res://Scripts/state_machine.gd" id="5_4kq4c"]
@@ -494,7 +495,7 @@ collision_layer = 2
 collision_mask = 41
 script = ExtResource("1_m0s3d")
 ANIMATION_PLAYER = NodePath("AnimationPlayer")
-WEAPON_ANIMATION_PLAYER = NodePath("CameraController/Camera3D/WeaponRig/WeaponAnimations")
+WEAPON_ANIMATION_PLAYER = NodePath("CameraController/Camera3D/WeaponsManager/WeaponRig/WeaponAnimations")
 AIM_FROM_CAMERA = NodePath("CameraController/Camera3D/AimCast")
 CAMERA_CONTROLLER = NodePath("CameraController/Camera3D")
 CROUCH_SHAPECAST = NodePath("ShapeCast3D")
@@ -513,20 +514,24 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 [node name="Camera3D" type="Camera3D" parent="CameraController"]
 cull_mask = 1048573
 
-[node name="WeaponRig" type="Node3D" parent="CameraController/Camera3D"]
-unique_name_in_owner = true
-
-[node name="RangeWeapon" parent="CameraController/Camera3D/WeaponRig" instance=ExtResource("2_cpcou")]
-
-[node name="WeaponAnimations" type="AnimationPlayer" parent="CameraController/Camera3D/WeaponRig"]
-libraries = {
-"": SubResource("AnimationLibrary_i61ey")
-}
-
 [node name="AimCast" type="RayCast3D" parent="CameraController/Camera3D"]
 target_position = Vector3(0, 0, -1000)
 collision_mask = 29
 collide_with_areas = true
+
+[node name="WeaponsManager" type="Node3D" parent="CameraController/Camera3D" node_paths=PackedStringArray("WEAPONS_ANIMATIONS")]
+script = ExtResource("2_t1pvi")
+WEAPONS_ANIMATIONS = NodePath("WeaponRig/WeaponAnimations")
+
+[node name="WeaponRig" type="Node3D" parent="CameraController/Camera3D/WeaponsManager"]
+unique_name_in_owner = true
+
+[node name="RangeWeapon" parent="CameraController/Camera3D/WeaponsManager/WeaponRig" instance=ExtResource("2_cpcou")]
+
+[node name="WeaponAnimations" type="AnimationPlayer" parent="CameraController/Camera3D/WeaponsManager/WeaponRig"]
+libraries = {
+"": SubResource("AnimationLibrary_i61ey")
+}
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -645,10 +650,11 @@ script = ExtResource("14_ch2p4")
 visible = false
 cull_mask = 1048574
 script = ExtResource("15_u78ox")
-MAIN_CAMERA = NodePath("../../../CameraController/Camera3D/WeaponRig")
+MAIN_CAMERA = NodePath("../../../CameraController/Camera3D/WeaponsManager/WeaponRig")
 
 [node name="Weapon" parent="WeaponViewport/SubViewport/WeaponCamera" instance=ExtResource("16_4kei8")]
 transform = Transform3D(-0.994523, 0.104476, -0.00304169, 0.00060908, 0.0348942, 0.999391, 0.104518, 0.993916, -0.0347667, -0.225, -0.19, -0.215)
 visible = false
 
+[connection signal="animation_finished" from="CameraController/Camera3D/WeaponsManager/WeaponRig/WeaponAnimations" to="CameraController/Camera3D/WeaponsManager" method="_on_weapon_animations_animation_finished"]
 [connection signal="animation_started" from="AnimationPlayer" to="." method="_on_animation_player_animation_started"]

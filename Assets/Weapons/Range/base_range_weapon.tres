@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="RangeWeaponResource" load_steps=2 format=3 uid="uid://dr7ovg3sakart"]
+
+[ext_resource type="Script" path="res://Scripts/range_weapon_resource.gd" id="1_kya3d"]
+
+[resource]
+script = ExtResource("1_kya3d")
+name = "BaseRangeWeapon"
+auto_fire = false
