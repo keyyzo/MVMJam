@@ -12,6 +12,9 @@ var weapon_list : Dictionary = {}
 
 @export var range_weapon_resources : Array[RangeWeaponResource]
 @export var start_weapons : Array[String]
+@export var muzzle : Marker3D
+
+var collision_exlusion = []
 
 func _ready() -> void:
 	pass
@@ -29,6 +32,9 @@ func _input(event: InputEvent) -> void:
 	#if event.is_action_pressed("weapon_down"):
 		#weapon_indicator = max(weapon_indicator-1, 0)
 		#exit(weapon_stack[weapon_indicator])
+		
+	#if event.is_action_pressed("attack"):
+		#shoot()
 
 func initialize_weapon(starting_weapons : Array):
 	#creating a dictionary to refer to our weapons
@@ -64,4 +70,47 @@ func _on_weapon_animations_animation_finished(anim_name: StringName) -> void:
 		change_weapon(next_weapon)
 		
 func shoot():
-	pass
+	var camera_collision = get_camera_collision()
+	
+	
+func get_camera_collision():
+	var camera = get_viewport().get_camera_3d()
+	var viewport = get_viewport().get_size()
+	
+	var ray_origin = camera.project_ray_origin(viewport/2)
+	var ray_end = ray_origin + camera.project_ray_normal(viewport/2)*current_weapon.weapon_range
+	
+	var new_intersection = PhysicsRayQueryParameters3D.create(ray_origin,ray_end)
+	new_intersection.set_exclude(collision_exlusion)
+	
+	var intersection = get_world_3d().direct_space_state.intersect_ray(new_intersection)
+	
+	if not intersection.is_empty():
+		var col_point = intersection.position
+		return col_point
+	else:
+		return ray_end
+		
+func hit_scan_collision(collision_point):
+	var bullet_direction = (collision_point - muzzle.get_global_transform().origin).normalized()
+	var new_intersection = PhysicsRayQueryParameters3D.create(muzzle.get_global_transform().origin,collision_point+bullet_direction*2)
+	
+	var bullet_collision = get_world_3d().direct_space_state.intersect_ray(new_intersection)
+	
+	if bullet_collision:
+		print("Hit scan damage")
+		
+func launch_projectile(collision_point : Vector3):
+	var direction = (collision_point - muzzle.get_global_transform().origin).normalized()
+	#var projectile = current_weapon.projectile_to_load.instantiate()
+	
+	#var projectile_rid = projectile.get_rid()
+	#collision_exlusion.push_back(projectile_rid)
+	#projectile.tree_exited.connect(remove_exclusion.bind(projectile.get_rid())
+	
+	#muzzle.add_child(projectile)
+	#projectile.damage = current_weapon.damage
+	#projectile.set_linear_velocity(direction * current_weapon.projectile_velocity)
+	
+func remove_exclusion(projectile_rid):
+	collision_exlusion.erase(projectile_rid)

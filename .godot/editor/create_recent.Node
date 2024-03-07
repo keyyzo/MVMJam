@@ -1,3 +1,4 @@
+Timer
 Node3D
 CollisionShape3D
 Area3D
@@ -12,4 +13,3 @@ Node
 MeshInstance3D
 Camera3D
 SubViewport
-SubViewportContainer

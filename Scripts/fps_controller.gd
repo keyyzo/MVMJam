@@ -57,6 +57,7 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("exit"):
 		get_tree().quit()
 		
+	
 		
 func _unhandled_input(event: InputEvent) -> void:
 	mouse_input = event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED
@@ -120,6 +121,23 @@ func update_input(speed: float, acceleration : float, deceleration : float) -> v
 		velocity.x = vel.normalized().x * temp
 		velocity.z = vel.normalized().y * temp
 	
+	if Input.is_action_just_pressed("attack"):	
+		attack()
+	
 func update_velocity() -> void:
 	move_and_slide()
+	
+
+
+		
+func attack():
+	#if Input.is_action_just_pressed("attack"):
+	if WEAPON_RIG.get_child(0).is_in_group("melee"):
+		if !WEAPON_ANIMATION_PLAYER.is_playing():
+			WEAPON_ANIMATION_PLAYER.play("MeleeAttack")
+			print("attacking")
+	elif WEAPON_RIG.get_child(0).is_in_group("range"):
+		if WEAPON_RIG.get_child(0).has_method("attack_v2"):
+			WEAPON_RIG.get_child(0).attack_v2()
+			print("attacking")
 	

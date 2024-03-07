@@ -12,7 +12,11 @@ extends Resource
 #@export var deactivate_animation : String
 
 @export var auto_fire : bool
+@export var damage : float
+@export var weapon_range : float
 
+@export var projectile_to_load : PackedScene
+@export var projectile_velocity : float
 
 
 

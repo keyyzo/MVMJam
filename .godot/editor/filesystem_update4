@@ -10,5 +10,9 @@ res://Scenes/melee_weapon.tscn
 res://Scenes/range_weapon.tscn
 res://Scenes/bullet.tscn
 res://Scripts/range_weapon_resource.gd
-res://Assets/Weapons/Range/base_range_weapon.tres
 res://Scripts/WeaponsManager.gd
+res://Scripts/Bullet.gd
+res://Scripts/range_weapon.gd
+res://Scripts/IdlePlayerState.gd
+res://Scripts/fps_controller.gd
+res://Scripts/state_machine.gd
